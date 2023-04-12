@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="city"
+            type="com.example.cityfinder.model.CityModel" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="10dp"
+            xmlns:tools="http://schemas.android.com/tools">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                app:preText='@{"City : "}'
+                app:dataString="@{city.name}"
+                tools:text="City Name"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                app:preText='@{"State : "}'
+                app:dataString="@{city.state}"
+                tools:text="State Name"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                app:preText='@{"Latitude : "}'
+                app:dataString="@{city.lat}"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                app:preText='@{"Longitute : "}'
+                app:dataString="@{city.lon}"
+                />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</layout>
