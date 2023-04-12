@@ -10,3 +10,7 @@
 - [x] 4.Show the details of the city in the new screen when one of the cities is clicked.
 
 - [x] 5.Details of the screen should contain the city located on the map.
+
+- [x] Added internet connection checks
+
+- [x] Added dark theme support

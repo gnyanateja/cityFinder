@@ -18,6 +18,7 @@ import retrofit2.Response
 import java.io.*
 import java.lang.reflect.Type
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class HomeViewModel: ViewModel() {
@@ -44,29 +45,33 @@ class HomeViewModel: ViewModel() {
     }
 
     fun fetchSavedCities(context: Context){
-        val content = StringBuilder()
-        try {
-            val br = BufferedReader(FileReader(getFile(context)))
-            var line: String?
-            while (br.readLine().also { line = it } != null) {
-                content.append(line)
+        try{
+            val content = StringBuilder()
+            try {
+                val br = BufferedReader(FileReader(getFile(context)))
+                var line: String?
+                while (br.readLine().also { line = it } != null) {
+                    content.append(line)
+                }
+                br.close()
+            } catch (e: IOException) {
+                e.printStackTrace()
             }
-            br.close()
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
-        if(context.toString().isEmpty()){
-            Log.d("TAG", "fetchCity: no data")
-            savedCities.value?.clear()
-            savedCities.value = ArrayList()
-        } else{
-            val typeToken: Type = object : TypeToken<ArrayList<CityModel>>() {}.type
+            if(context.toString().isEmpty()){
+                Log.d("TAG", "fetchCity: no data")
+                savedCities.value?.clear()
+                savedCities.value = ArrayList()
+            } else{
+                val typeToken: Type = object : TypeToken<ArrayList<CityModel>>() {}.type
 //            val reader = JsonReader(StringReader(content))
 //            reader.isLenient = true
-            Log.d("TAG", "fetchCity: "+content)
-            val jsonObjs = gson.fromJson(content.toString(), typeToken) as ArrayList<CityModel>
+                Log.d("TAG", "fetchCity: "+content)
+                val jsonObjs = gson.fromJson(content.toString(), typeToken) as ArrayList<CityModel>
+                savedCities.value = ArrayList()
+                savedCities.value?.addAll(jsonObjs)
+            }
+        } catch (ex:java.lang.Exception){
             savedCities.value = ArrayList()
-            savedCities.value?.addAll(jsonObjs)
         }
     }
 
